@@ -1,8 +1,8 @@
-const express = require('express');
+const router = require('express').Router();
 
+// Controller import
 const test = require('./test');
-
-const router = express.Router();
+const s3Api = require('./s3.api');
 
 router.get('/', (req, res) => {
   res.json({
@@ -11,5 +11,6 @@ router.get('/', (req, res) => {
 });
 
 router.use('/test', test);
+router.use('/s3', s3Api);
 
 module.exports = router;
