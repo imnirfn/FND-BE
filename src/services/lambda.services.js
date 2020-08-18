@@ -14,6 +14,14 @@ exports.connectToLambda = () => {
     lambda = new AWS.Lambda({ apiVersion: '2015-03-31' });
     if (!lambda) throw new Error('Failed to connect to lambda sdk');
 
+    console.log('lambda instance', lambda);
+
+    lambda.listFunctions((err, data) => {
+      if (err) console.log(err);
+
+      console.log(data);
+    });
+
     return lambda;
   }
 

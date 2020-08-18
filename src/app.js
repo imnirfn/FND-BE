@@ -2,14 +2,22 @@ const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
-const { connectToAWS } = require('./services/s3.services');
+const {
+  connectToAWS,
+  connectToLambda
+} = require('./services/index.services');
+
 require('dotenv').config();
 
 const middlewares = require('./middlewares');
 const api = require('./api');
 
 const app = express();
+
+// Connect to AWS instance
 connectToAWS();
+connectToLambda();
+
 app.use(morgan('dev'));
 app.use(helmet());
 app.use(cors());
