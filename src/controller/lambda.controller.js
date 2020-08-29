@@ -5,9 +5,9 @@ const lambda = connectToLambda();
 exports.callFunction = async (req, res) => {
   const params = {
     FunctionName: 'myScraper',
-    InvokeArgs: 'null'
+    Payload: '',
   };
-  lambda.invokeAsync(params, (err, data) => {
+  lambda.invoke(params, (err, data) => {
     if (err) res.status(500).json({ msg: err });
 
     res.json(data);
