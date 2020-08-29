@@ -8,16 +8,15 @@ exports.callFunction = async (req, res) => {
     InvokeArgs: 'null'
   };
   lambda.invokeAsync(params, (err, data) => {
-    if (err) console.log(err);
+    if (err) res.status(500).json({ msg: err });
 
-    console.log(data, 'response from lambda yall');
     res.json(data);
   });
 };
 
 exports.listAllFunctions = async (req, res) => {
   lambda.listFunctions((err, data) => {
-    if (err) console.log(err);
+    if (err) res.status(500).json({ msg: err });
 
     res.json(data);
   });
