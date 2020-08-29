@@ -2,7 +2,6 @@
 const AWS = require('aws-sdk');
 
 let lambda = null;
-
 exports.connectToLambda = () => {
   if (!lambda) {
     const credentials = new AWS.SharedIniFileCredentials({ profile: 's3-bucket' });
@@ -13,14 +12,6 @@ exports.connectToLambda = () => {
     // Create S3 service object
     lambda = new AWS.Lambda({ apiVersion: '2015-03-31' });
     if (!lambda) throw new Error('Failed to connect to lambda sdk');
-
-    console.log('lambda instance', lambda);
-
-    lambda.listFunctions((err, data) => {
-      if (err) console.log(err);
-
-      console.log(data);
-    });
 
     return lambda;
   }
