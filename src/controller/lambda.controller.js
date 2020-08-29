@@ -3,10 +3,13 @@ const { connectToLambda } = require('../services/lambda.services');
 const lambda = connectToLambda();
 
 exports.callFunction = async (req, res) => {
+  const { body } = req;
+
   const params = {
     FunctionName: 'myScraper',
-    Payload: '',
+    Payload: JSON.stringify(body),
   };
+  console.log(params, 'the params is here madafaka');
   lambda.invoke(params, (err, data) => {
     if (err) res.status(500).json({ msg: err });
 
