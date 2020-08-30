@@ -6,7 +6,7 @@ exports.callFunction = async (req, res) => {
   const { body } = req;
 
   const params = {
-    FunctionName: 'myScraper',
+    FunctionName: 'myscraper-dev-to_documents',
     Payload: JSON.stringify(body),
   };
   console.log(params, 'the params is here madafaka');
