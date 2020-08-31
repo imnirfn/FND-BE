@@ -25,7 +25,7 @@ exports.listAllFunctions = async (req, res) => {
 };
 
 exports.uploadDocument = async (req, res) => {
-  console.log(req.files);
+  // Logic to manipulate the file goes here
   res.json(req.files);
 };
 
