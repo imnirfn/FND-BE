@@ -2,7 +2,7 @@ const { connectToLambda } = require('../services/lambda.services');
 
 const lambda = connectToLambda();
 
-exports.callFunction = async (req, res) => {
+exports.invokeToDocument = async (req, res) => {
   const { body } = req;
 
   const params = {
