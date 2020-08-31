@@ -2,7 +2,7 @@ const { connectToLambda } = require('../services/lambda.services');
 
 const lambda = connectToLambda();
 
-exports.callFunction = async (req, res) => {
+exports.invokeToDocument = async (req, res) => {
   const { body } = req;
 
   const params = {
@@ -22,6 +22,11 @@ exports.listAllFunctions = async (req, res) => {
 
     res.json(data);
   });
+};
+
+exports.uploadDocument = async (req, res) => {
+  // Logic to manipulate the file goes here
+  res.json(req.files);
 };
 
 exports.getInstance = async (req, res) => {
