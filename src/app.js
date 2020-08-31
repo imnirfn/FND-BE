@@ -1,4 +1,6 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
 const morgan = require('morgan');
 const helmet = require('helmet');
 const cors = require('cors');
@@ -13,7 +15,8 @@ const middlewares = require('./middlewares');
 const api = require('./api');
 
 const app = express();
-
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(fileUpload());
 // Connect to AWS instance
 connectToAWS();
 connectToLambda();
