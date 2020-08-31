@@ -9,7 +9,6 @@ exports.callFunction = async (req, res) => {
     FunctionName: 'myscraper-dev-to_documents',
     Payload: JSON.stringify(body),
   };
-  console.log(params, 'the params is here madafaka');
   lambda.invoke(params, (err, data) => {
     if (err) res.status(500).json({ msg: err });
 

@@ -3,6 +3,6 @@ const lambdaControler = require('../controller/lambda.controller.js');
 
 router.get('/listFunction', lambdaControler.listAllFunctions)
   .get('/getInstance', lambdaControler.getInstance)
-  .get('/invoke', lambdaControler.callFunction);
+  .get('/scrape-to-document', lambdaControler.callFunction);
 
 module.exports = router;
