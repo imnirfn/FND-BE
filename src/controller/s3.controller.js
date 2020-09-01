@@ -7,17 +7,22 @@ exports.uploadDocument = async (req, res) => {
   // eslint-disable-next-line no-console
   console.log(req.files.filename);
 
-  // try {
-  //   const uploadParams = { Bucket: 'tinggitecc', Key: req.files.name, Body: req.files.data };
-  //   await s3.upload(uploadParams, (err, data) => {
-  //     if (err) res.status(500).json({ error: err });
-  //     // eslint-disable-next-line no-console
-  //     console.log('Success');
-  //     res.json(data.Location);
-  //   }).promise();
-  // } catch (err) {
-  //   throw new Error(`S3 upload error: ${err.message}`);
-  // }
+  try {
+    const uploadParams = {
+      Bucket: 'tinggitecc',
+      Key: req.files.filename.name,
+      Body: req.files.filename.data
+    };
+
+    await s3.upload(uploadParams, (err, data) => {
+      if (err) res.status(500).json({ error: err });
+      // eslint-disable-next-line no-console
+      console.log('Success');
+      res.json(data.Location);
+    }).promise();
+  } catch (err) {
+    throw new Error(`S3 upload error: ${err.message}`);
+  }
 };
 
 exports.getAllBucket = async (req, res) => {
