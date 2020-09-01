@@ -21,6 +21,8 @@ exports.uploadDocument = async (req, res) => {
   } catch (err) {
     throw new Error(`S3 upload error: ${err.message}`);
   }
+
+  // trigger lambda function to run prediction based on the S3
 };
 
 exports.getAllBucket = async (req, res) => {
