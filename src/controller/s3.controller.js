@@ -16,8 +16,6 @@ exports.uploadDocument = async (req, res) => {
 
     await s3.upload(uploadParams, (err, data) => {
       if (err) res.status(500).json({ error: err });
-      // eslint-disable-next-line no-console
-      console.log('Success');
       res.json(data.Location);
     }).promise();
   } catch (err) {
