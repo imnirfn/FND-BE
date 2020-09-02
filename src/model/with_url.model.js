@@ -12,11 +12,17 @@ exports.createItem = (arg) => {
   doClient.put(params, (err, res) => {
     if (err) throw new Error(err);
 
-    console.log(res);
+    console.log(res, 'response from the put');
     return res;
   });
 };
 
 exports.readItem = (arg) => {
   params.Key = arg;
+
+  doClient.get(params, (err, res) => {
+    if (err) throw new Error(err);
+    console.log(res, 'response from the get');
+    return res;
+  });
 };
