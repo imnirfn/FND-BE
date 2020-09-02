@@ -60,7 +60,7 @@ exports.with_url = async (req, res) => {
 
     if (article.includes('errorMessage')) {
       console.log('Error fetching news in text form');
-	  article = JSON.parse(article);
+      article = JSON.parse(article);
       return res.status(500).json({ msg: `Error fetching news in text form: ${article.errorMessage}` });
     }
 
