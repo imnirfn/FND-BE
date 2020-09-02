@@ -1,5 +1,6 @@
 const { callModelEndpoint } = require('../services/index.services');
 const { connectToLambda } = require('../services/index.services');
+const urlModel = require('../model/with_url.model.js');
 
 const lambda = connectToLambda();
 const { connectToAWS } = require('../services/s3.services');
@@ -70,6 +71,18 @@ exports.with_url = async (req, res) => {
     callModelEndpoint(param)
       .then((response) => {
         console.log(response);
+        const urlParam = {
+          url: body.data,
+          text: article,
+          prediction: response.data.prediction[0],
+          checked: true,
+          label: 1
+        };
+        urlModel.create(urlParam, (urlError, urlData) => {
+          if (urlError) console.log(urlError);
+
+          console.log(urlData);
+        });
         return res.json({ data: response });
       }).catch((error) => {
         console.log(error);
