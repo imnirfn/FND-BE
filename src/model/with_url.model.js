@@ -1,6 +1,7 @@
-const AWS = require('aws-sdk');
+const { connectToDynamo } = require('../services/dynamoDB.services');
 
-const doClient = new AWS.DynamoDB.DocumentClient();
+const dynamo = connectToDynamo();
+
 const TABLE_NAME = 'with_url';
 const params = {
   TableName: TABLE_NAME
@@ -8,8 +9,9 @@ const params = {
 
 exports.createItem = (arg) => {
   params.Item = arg;
-
-  doClient.put(params, (err, res) => {
+  console.log(dynamo);
+  console.log(params);
+  dynamo.put(params, (err, res) => {
     if (err) throw new Error(err);
 
     console.log(res, 'response from the put');
@@ -20,7 +22,7 @@ exports.createItem = (arg) => {
 exports.readItem = (arg) => {
   params.Key = arg;
 
-  doClient.get(params, (err, res) => {
+  dynamo.get(params, (err, res) => {
     if (err) throw new Error(err);
     console.log(res, 'response from the get');
     return res;

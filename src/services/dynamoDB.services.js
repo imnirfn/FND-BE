@@ -8,10 +8,22 @@ exports.connectToDynamo = () => {
 
     AWS.config.update({ region: 'ap-southest-1' });
 
-    dynamo = new AWS.DynamoDB({ apiVersion: '2012-08-10' });
+    dynamo = new AWS.DynamoDB.DocumentClient();
     if (!dynamo) throw new Error('Failed to connect to dynamo');
 
     return dynamo;
   }
   return dynamo;
 };
+
+const { createItem } = require('../model/with_url.model');
+
+const arg = {
+  id: 'kontol',
+  text: 'ehehehhee',
+  url: 'trmp gay'
+};
+
+const res = createItem(arg);
+
+console.log(res);
