@@ -1,11 +1,22 @@
-const dynamoose = require('dynamoose');
+const AWS = require('aws-sdk');
 
-const urlSChema = new dynamoose.Schema({
-  id: String,
-  text: String,
-  prediction: Number,
-  checked: Boolean,
-  label: Boolean
-});
+const doClient = new AWS.DynamoDB.DocumentClient();
+const TABLE_NAME = 'with_url';
+const params = {
+  TableName: TABLE_NAME
+};
 
-module.exports = dynamoose.model('url', urlSChema);
+exports.createItem = (arg) => {
+  params.Item = arg;
+
+  doClient.put(params, (err, res) => {
+    if (err) throw new Error(err);
+
+    console.log(res);
+    return res;
+  });
+};
+
+exports.readItem = (arg) => {
+  params.Key = arg;
+};
