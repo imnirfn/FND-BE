@@ -56,7 +56,14 @@ exports.with_url = async (req, res) => {
       return res.status(500).json({ msg: err });
     }
 
-    const article = data.Payload;
+    let article = data.Payload;
+
+    if (article.includes('errorMessage')) {
+      console.log('Error fetching news in text form');
+	  article = JSON.parse(article);
+      return res.status(500).json({ msg: `Error fetching news in text form: ${article.errorMessage}` });
+    }
+
     const param = { data: { article } };
     console.log(param);
 
