@@ -8,4 +8,4 @@ const urlSChema = new dynamoose.Schema({
   label: Boolean
 });
 
-module.exports = urlSChema;
+module.exports = dynamoose.model('url', urlSChema);
