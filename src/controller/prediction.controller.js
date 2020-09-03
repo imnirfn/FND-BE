@@ -5,9 +5,10 @@ const { connectToLambda } = require('../services/index.services');
 const lambda = connectToLambda();
 
 const { connectToAWS } = require('../services/s3.services');
-const { response } = require('express');
 
 const s3 = connectToAWS();
+
+const modelUrl = require('../model/with_url.model');
 
 /**
  * Prediction using document
@@ -82,7 +83,15 @@ exports.with_url = async (req, res) => {
     callModelEndpoint(predictParam)
       .then((resp) => {
         console.log(resp);
-        return res.json({ data: resp });
+        // Insert into dynamo
+        const arg = {
+          url: body.data,
+          text: article,
+          prediction: resp.predictions,
+          sentiment: resp.sentiment
+        };
+        const urlCreate = modelUrl.createItem(arg);
+        return res.json({ data: urlCreate });
       }).catch((error) => {
         console.log(error);
         return res.status(500).json({ msg: error });
