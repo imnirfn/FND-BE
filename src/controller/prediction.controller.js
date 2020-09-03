@@ -5,6 +5,7 @@ const { connectToLambda } = require('../services/index.services');
 const lambda = connectToLambda();
 
 const { connectToAWS } = require('../services/s3.services');
+const { response } = require('express');
 
 const s3 = connectToAWS();
 
@@ -60,7 +61,7 @@ exports.with_url = async (req, res) => {
     FunctionName: 'myscraper-dev-to_documents',
     Payload: JSON.stringify(body),
   };
-
+  let predictParam = null;
   lambda.invoke(params, (err, data) => {
     if (err) {
       console.log('Error in lambda invocation', err);
@@ -76,16 +77,33 @@ exports.with_url = async (req, res) => {
       return res.status(500).json({ msg: `Error fetching news in text form: ${article.errorMessage}` });
     }
 
-    const param = { data: { article } };
-    console.log(param, 'param to prediction');
+    predictParam = { data: { article } };
+    // console.log(param, 'param to prediction');
 
-    callModelEndpoint(param)
-      .then((response) => {
-        console.log(response);
-        return res.json({ data: response });
-      }).catch((error) => {
-        console.log(error);
-        return res.status(500).json({ msg: error });
-      });
+    // callModelEndpoint(param)
+    //   .then((response) => {
+    //     console.log(response);
+    //     return res.json({ data: response });
+    //   }).catch((error) => {
+    //     console.log(error);
+    //     return res.status(500).json({ msg: error });
+    //   });
   });
+  console.log(predictParam, 'param to prediction');
+
+  callModelEndpoint(predictParam)
+    .then((resp) => {
+      console.log(resp);
+      return res.json({ data: response });
+    }).catch((error) => {
+      console.log(error);
+      return res.status(500).json({ msg: error });
+    });
+
+  // Await async approach:w
+
+  // const predictResponse = await callModelEndpoint(predictParam);
+  // if (!predictResponse) return res.status(500).json({ mgs: 'Error la anjing' });
+
+  // return res.json({ data: predictResponse });
 };
