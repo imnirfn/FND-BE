@@ -85,7 +85,7 @@ exports.with_url = async (req, res) => {
         console.log(resp);
         // Insert into dynamo
         const arg = {
-          id: 1,
+          id: 'muaz kacakz',
           url: body.data,
           text: article,
           prediction: resp.predictions,
