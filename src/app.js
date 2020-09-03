@@ -6,7 +6,8 @@ const helmet = require('helmet');
 const cors = require('cors');
 const {
   connectToAWS,
-  connectToLambda
+  connectToLambda,
+  connectToDynamo
 } = require('./services/index.services');
 
 require('dotenv').config();
@@ -20,6 +21,7 @@ app.use(fileUpload());
 // Connect to AWS instance
 connectToAWS();
 connectToLambda();
+connectToDynamo();
 
 app.use(morgan('dev'));
 app.use(helmet());
