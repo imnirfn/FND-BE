@@ -9,8 +9,7 @@ const params = {
 
 exports.createItem = (arg) => {
   params.Item = arg;
-  console.log(dynamo);
-  console.log(params);
+  console.log(params, 'The paramater sent to dynamo');
   dynamo.put(params, (err, res) => {
     if (err) throw new Error(err);
 

@@ -1,12 +1,14 @@
 const { callModelEndpoint } = require('../services/index.services');
 const { connectToLambda } = require('../services/index.services');
-const urlModel = require('../model/with_url.model.js');
 
 const lambda = connectToLambda();
 const { connectToAWS } = require('../services/s3.services');
 
 const s3 = connectToAWS();
 
+/**
+ * Prediction using document
+ */
 exports.with_document = async (req, res) => {
   res.json(req.files);
   // eslint-disable-next-line no-console
@@ -30,6 +32,9 @@ exports.with_document = async (req, res) => {
   // trigger lambda function to run prediction based on the S3
 };
 
+/**
+ * Prediction using text
+ */
 exports.with_text = async (req, res) => {
   try {
     const modelResponse = await callModelEndpoint(req.body);
@@ -42,6 +47,9 @@ exports.with_text = async (req, res) => {
   }
 };
 
+/**
+ * Prediction using URL
+ */
 exports.with_url = async (req, res) => {
   const { body } = req;
   console.log('Request to with_url: ', body);
