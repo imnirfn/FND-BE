@@ -1,7 +1,9 @@
 const { callModelEndpoint } = require('../services/index.services');
+
 const { connectToLambda } = require('../services/index.services');
 
 const lambda = connectToLambda();
+
 const { connectToAWS } = require('../services/s3.services');
 
 const s3 = connectToAWS();
@@ -66,6 +68,7 @@ exports.with_url = async (req, res) => {
     }
 
     let article = data.Payload;
+    console.log(article, 'the article from lambda');
 
     if (article.includes('errorMessage')) {
       console.log('Error fetching news in text form');
@@ -74,7 +77,7 @@ exports.with_url = async (req, res) => {
     }
 
     const param = { data: { article } };
-    console.log(param);
+    console.log(param, 'param to prediction');
 
     callModelEndpoint(param)
       .then((response) => {
