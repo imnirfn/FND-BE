@@ -15,15 +15,3 @@ exports.connectToDynamo = () => {
   }
   return dynamo;
 };
-
-const { createItem } = require('../model/with_url.model');
-
-const arg = {
-  id: 'kontol',
-  text: 'ehehehhee',
-  url: 'trmp gay'
-};
-
-const res = createItem(arg);
-
-console.log(res);
