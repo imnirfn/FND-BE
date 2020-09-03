@@ -82,7 +82,7 @@ exports.with_url = async (req, res) => {
     callModelEndpoint(predictParam)
       .then((resp) => {
         console.log(resp);
-        return res.json({ data: response });
+        return res.json({ data: resp });
       }).catch((error) => {
         console.log(error);
         return res.status(500).json({ msg: error });
