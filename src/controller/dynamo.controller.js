@@ -9,9 +9,9 @@ const params = {
 };
 exports.getAll = async (req, res) => {
   // const response = await modelUrl.getAll();
-  await dynamo.scan(params, (err, data) => {
+  dynamo.scan(params, (err, data) => {
     if (err) throw new Error(err);
     res.json(data);
-  }).promise();
+  });
   // console.log(response, 'resp in controller');
 };
