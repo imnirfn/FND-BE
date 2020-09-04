@@ -95,7 +95,8 @@ exports.with_url = async (req, res) => {
           timestamp: new Date().toISOString()
         };
         const urlCreate = modelUrl.createItem(arg);
-        return res.json({ data: urlCreate });
+        if (urlCreate) console.log('hueheuheu');
+        return res.json({ data: resp });
       }).catch((error) => {
         console.log(error);
         return res.status(500).json({ msg: error });
