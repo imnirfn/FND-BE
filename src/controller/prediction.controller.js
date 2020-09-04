@@ -92,7 +92,7 @@ exports.with_url = async (req, res) => {
           text: article,
           prediction: resp.predictions,
           sentiment: resp.sentiment,
-          timestamp: new Date()
+          timestamp: new Date().toISOString()
         };
         const urlCreate = modelUrl.createItem(arg);
         return res.json({ data: urlCreate });
