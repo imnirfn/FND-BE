@@ -29,8 +29,11 @@ exports.readItem = (arg) => {
 };
 
 exports.getAll = async () => {
-  dynamo.scan(params, (err, data) => {
+  let res = null;
+  await dynamo.scan(params, (err, data) => {
     if (err) throw new Error(err);
+    res = data;
+    console.log(`${res} ${data}`);
     return data;
   });
 };
