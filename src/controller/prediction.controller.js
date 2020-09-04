@@ -1,3 +1,4 @@
+const { v4: uuidv4 } = require('uuid');
 const { callModelEndpoint } = require('../services/index.services');
 
 const { connectToLambda } = require('../services/index.services');
@@ -85,7 +86,7 @@ exports.with_url = async (req, res) => {
         console.log(resp);
         // Insert into dynamo
         const arg = {
-          id: 'muaz kacakz',
+          id: uuidv4(),
           url: body.data,
           text: article,
           prediction: resp.predictions,
