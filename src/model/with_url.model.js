@@ -33,7 +33,7 @@ exports.getAll = async () => {
   await dynamo.scan(params, (err, data) => {
     if (err) throw new Error(err);
     res = data;
-    console.log(`${res} ${data}`);
-    return data;
-  });
+  }).promise();
+
+  return res;
 };
