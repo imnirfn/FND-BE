@@ -5,6 +5,7 @@ const test = require('./test');
 const s3Api = require('./s3.api');
 const lambdaApi = require('./lambda.api');
 const predictApi = require('./prediction.api');
+const dynamoApi = require('./dynamo.api');
 
 router.get('/', (req, res) => {
   res.json({
@@ -16,4 +17,6 @@ router.use('/test', test);
 router.use('/s3', s3Api);
 router.use('/lambda', lambdaApi);
 router.use('/predict', predictApi);
+router.use('/dynamo', dynamoApi);
+
 module.exports = router;
