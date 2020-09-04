@@ -3,6 +3,10 @@ const { connectToDynamo } = require('../services/dynamoDB.services');
 
 const dynamo = connectToDynamo();
 
+const TABLE_NAME = 'with_url';
+const params = {
+  TableName: TABLE_NAME
+};
 exports.getAll = async (req, res) => {
   // const response = await modelUrl.getAll();
   await dynamo.scan(params, (err, data) => {
