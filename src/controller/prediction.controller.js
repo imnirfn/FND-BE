@@ -57,7 +57,7 @@ exports.with_text = async (req, res) => {
  */
 exports.with_url = async (req, res) => {
   const { body } = req;
-  const url = new URL(body.data);
+  // const url = new URL(body.data);
   console.log('Request to with_url: ', body);
 
   const params = {
@@ -92,7 +92,7 @@ exports.with_url = async (req, res) => {
           text: article,
           prediction: resp.predictions,
           sentiment: resp.sentiment,
-          title: url.hostname
+          // title: url.hostname
         };
         const urlCreate = modelUrl.createItem(arg);
         return res.json({ data: urlCreate });
