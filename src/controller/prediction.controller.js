@@ -92,7 +92,7 @@ exports.with_url = async (req, res) => {
           text: article,
           prediction: resp.predictions,
           sentiment: resp.sentiment,
-          // title: url.hostname
+          timestamp: () => new Date()
         };
         const urlCreate = modelUrl.createItem(arg);
         return res.json({ data: urlCreate });
