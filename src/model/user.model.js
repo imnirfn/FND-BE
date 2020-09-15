@@ -25,6 +25,10 @@ const userSchema = new mongoose.Schema({
   },
   deleted: {
     type: Date
+  },
+  roles: {
+    type: String,
+    required: true
   }
 });
 
@@ -33,7 +37,7 @@ exports.userTransformer = (user) => {
     id: user._id,
     name: user.name,
     email: user.email,
-    roles: ['admin']
+    roles: user.roles
   };
 
   return formatted;

@@ -43,6 +43,7 @@ exports.register = async (req, res) => {
   } catch (err) {
     res.status(400).json({ err });
   }
+  return null;
 };
 
 exports.login = async (req, res) => {
@@ -72,6 +73,7 @@ exports.login = async (req, res) => {
       token
     }
   });
+  return null;
 };
 
 exports.test = async (req) => {
