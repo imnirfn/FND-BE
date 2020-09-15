@@ -14,6 +14,9 @@ const registerValidator = (data) => {
     password: joi.string()
       .min(6)
       .max(255)
+      .required(),
+    roles: joi.string()
+      .valid('user', 'journalist', 'admin', 'enterprise')
       .required()
   });
 

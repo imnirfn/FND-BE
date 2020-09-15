@@ -29,7 +29,8 @@ exports.register = async (req, res) => {
   const user = new User({
     name: req.body.name,
     email: req.body.email,
-    password: hash
+    password: hash,
+    roles: req.body.roles
   });
 
   console.log(`New User: ${user}`);
@@ -62,7 +63,8 @@ exports.login = async (req, res) => {
   const token = jwt.sign(
     {
       name: user.name,
-      id: user._id
+      id: user._id,
+      roles: user.roles
     },
     config.tokenSecret
   );
