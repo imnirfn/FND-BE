@@ -10,6 +10,8 @@ const {
   connectToDynamo
 } = require('./services/index.services');
 
+const mongo = require('./db');
+
 require('dotenv').config();
 
 const middlewares = require('./middlewares');
@@ -22,6 +24,7 @@ app.use(fileUpload());
 connectToAWS();
 connectToLambda();
 connectToDynamo();
+mongo();
 
 app.use(morgan('dev'));
 app.use(helmet());
