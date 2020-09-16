@@ -19,8 +19,9 @@ exports.createItem = (arg) => {
 };
 
 exports.readItem = (url) => {
-  params.FilterExpression = '#url = :urlData';
-  params.ExpressionAttributeValues = { ':urlData': url };
+  params.FilterExpression = '#url = :url';
+  params.ExpressionAttributeValues = { ':url': url };
+  params.ExpressionAttributeNames = { '#url': 'url' };
 
   dynamo.scan(params, (err, res) => {
     if (err) throw new Error(err);
