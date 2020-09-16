@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 router.use('/test', verifyToken, test);
 router.use('/s3', verifyToken, s3Api);
 router.use('/lambda', verifyToken, lambdaApi);
-router.use('/predict', verifyToken, predictApi);
+router.use('/predict', predictApi);
 router.use('/dynamo', verifyToken, dynamoApi);
 router.use('/auth', auth);
 
