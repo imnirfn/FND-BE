@@ -18,8 +18,12 @@ exports.createItem = (arg) => {
   });
 };
 
-exports.readItem = (arg) => {
-  params.Key = arg;
+exports.readItem = (url) => {
+  params.Key = {
+    'url': {
+      S: url
+    }
+  }
 
   dynamo.get(params, (err, res) => {
     if (err) throw new Error(err);
@@ -35,13 +39,16 @@ exports.getAll = async () => {
   }).promise();
 };
 
-exports.deleteItem = async (arg) => {
+exports.deleteItem = dynamo (url) => {
   params.Key = {
-    url: arg.url
+    url: {
+      S: url
+    }
   };
 
   await dynamo.deleteItem(params, (err, data) => {
-    if (err) console.log(err);
-    return data;
-  });
+    if (err) console.log(err)
+    return data
+  }) 
+  return
 };
