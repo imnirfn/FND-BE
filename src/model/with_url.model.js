@@ -19,10 +19,9 @@ exports.createItem = (arg) => {
 };
 
 exports.readItem = (url) => {
-  const key = { url };
-  params.Key = key;
-
-  dynamo.get(params, (err, res) => {
+  params.FilterExpression = 'url = :url';
+  params.ExpressionAttributeValues = { ':url': url };
+  dynamo.scan(params, (err, res) => {
     if (err) throw new Error(err);
     console.log(res, 'response from the get');
     return res;
