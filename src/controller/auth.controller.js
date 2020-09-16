@@ -30,7 +30,7 @@ exports.register = async (req, res) => {
     name: req.body.name,
     email: req.body.email,
     password: hash,
-    roles: req.body.roles
+    roles: req.body.role
   });
 
   console.log(`New User: ${user}`);
