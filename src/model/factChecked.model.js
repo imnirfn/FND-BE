@@ -1,4 +1,3 @@
-const { number } = require('@hapi/joi');
 const mongoose = require('mongoose');
 
 const factCheckSchema = new mongoose.Schema({
@@ -13,12 +12,12 @@ const factCheckSchema = new mongoose.Schema({
   },
 
   prediction: {
-    type: String,
+    type: Number,
     required: true
   },
 
   sentiment: {
-    type: number,
+    type: String,
     required: true
   },
 
@@ -53,4 +52,4 @@ exports.factCheckTransformer = (fact) => {
   return formatted;
 };
 
-exports.User = mongoose.model('FactChecked', factCheckSchema);
+exports.FactChecked = mongoose.model('FactChecked', factCheckSchema);

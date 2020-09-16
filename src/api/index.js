@@ -9,6 +9,7 @@ const lambdaApi = require('./lambda.api');
 const predictApi = require('./prediction.api');
 const dynamoApi = require('./dynamo.api');
 const auth = require('./auth.api');
+const factCheck = require('./factCheck.api');
 
 router.get('/', (req, res) => {
   res.json({
@@ -22,5 +23,6 @@ router.use('/lambda', verifyToken, lambdaApi);
 router.use('/predict', predictApi);
 router.use('/dynamo', verifyToken, dynamoApi);
 router.use('/auth', auth);
+router.use('/fectChecked', verifyToken, factCheck);
 
 module.exports = router;
