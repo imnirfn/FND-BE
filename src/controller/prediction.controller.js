@@ -41,11 +41,19 @@ exports.with_document = async (req, res) => {
  * Prediction using text
  */
 exports.with_text = async (req, res) => {
+  const articleText = req.body.data;
   try {
-    const modelResponse = await callModelEndpoint(req.body);
+    const predictParam = { data: { article: articleText } };
+    console.log(predictParam, 'param to prediction');
 
-    console.log('Response from model endpoint', modelResponse);
-    return res.json({ data: modelResponse });
+    callModelEndpoint(predictParam)
+      .then((resp) => {
+        console.log(resp);
+        return res.json({ data: resp });
+      }).catch((error) => {
+        console.log(error);
+        return res.status(500).json({ msg: error });
+      });
   } catch (err) {
     console.log('Error', err);
     return res.status(500).json({ msg: err });
