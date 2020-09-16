@@ -29,7 +29,7 @@ const userSchema = new mongoose.Schema({
   roles: {
     type: String,
     required: true
-  }
+  },
 });
 
 exports.userTransformer = (user) => {
