@@ -19,11 +19,8 @@ exports.createItem = (arg) => {
 };
 
 exports.readItem = (url) => {
-  params.Key = {
-    url: {
-      S: url
-    }
-  };
+  const key = { url };
+  params.Key = key;
 
   dynamo.get(params, (err, res) => {
     if (err) throw new Error(err);
@@ -40,11 +37,8 @@ exports.getAll = async () => {
 };
 
 exports.deleteItem = async (url) => {
-  params.Key = {
-    url: {
-      S: url
-    }
-  };
+  const key = { url };
+  params.Key = key;
 
   await dynamo.deleteItem(params, (err, data) => {
     if (err) console.log(err);
