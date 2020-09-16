@@ -20,10 +20,10 @@ exports.createItem = (arg) => {
 
 exports.readItem = (url) => {
   params.Key = {
-    'url': {
+    url: {
       S: url
     }
-  }
+  };
 
   dynamo.get(params, (err, res) => {
     if (err) throw new Error(err);
@@ -39,7 +39,7 @@ exports.getAll = async () => {
   }).promise();
 };
 
-exports.deleteItem = dynamo (url) => {
+exports.deleteItem = async (url) => {
   params.Key = {
     url: {
       S: url
@@ -47,8 +47,7 @@ exports.deleteItem = dynamo (url) => {
   };
 
   await dynamo.deleteItem(params, (err, data) => {
-    if (err) console.log(err)
-    return data
-  }) 
-  return
+    if (err) console.log(err);
+    return data;
+  });
 };
