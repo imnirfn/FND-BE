@@ -28,17 +28,12 @@ exports.insertData = async (req, res) => {
 };
 
 exports.getAll = async (req, res) => {
-  const arg = [];
+  // const arg = [];
   try {
-    const all = await FactChecked.find().populate('user').exec();
-
-    all.forEach((data) => {
-      arg.push(factCheckTransformer(data));
-    });
-
+    const all = await FactChecked.find();
     res.json({
       error: null,
-      data: arg
+      data: all
     });
   } catch (err) {
     res.status(404).json({ err });
@@ -49,7 +44,7 @@ exports.getById = async (req, res) => {
   const { id } = req.params;
 
   try {
-    const fact = await FactChecked.findById(id).populate('user').exec();
+    const fact = await FactChecked.findById(id);
     res.json({
       error: null,
       data: fact

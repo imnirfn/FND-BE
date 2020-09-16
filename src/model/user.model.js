@@ -30,8 +30,6 @@ const userSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-
-  FactChecked: { type: mongoose.Schema.Types.ObjectId, ref: 'FactChecked' },
 });
 
 exports.userTransformer = (user) => {
