@@ -19,7 +19,7 @@ exports.createItem = (arg) => {
 };
 
 exports.readItem = (url) => {
-  params.FilterExpression = 'url = :urlData';
+  params.FilterExpression = '#url = :urlData';
   params.ExpressionAttributeValues = { ':urlData': url };
 
   dynamo.scan(params, (err, res) => {
