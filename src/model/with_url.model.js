@@ -35,15 +35,13 @@ exports.getAll = async () => {
   }).promise();
 };
 
-exports.deleteItem = dynamo (arg) => {
+exports.deleteItem = async (arg) => {
   params.Key = {
     url: arg.url
   };
 
   await dynamo.deleteItem(params, (err, data) => {
-    if (err) console.log(err)
-    return data
-  }) 
-
-  return
+    if (err) console.log(err);
+    return data;
+  });
 };
