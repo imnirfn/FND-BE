@@ -94,8 +94,10 @@ exports.with_url = async (req, res) => {
           sentiment: resp.sentiment,
           timestamp: new Date().toISOString()
         };
+        const fetch = modelUrl.readItem(body.article);
+        console.log(fetch, 'fetched from dynamo');
         const urlCreate = modelUrl.createItem(arg);
-        if (urlCreate) console.log('hueheuheu');
+        if (urlCreate) console.log('Inserted into Dynamo');
         return res.json({ data: resp });
       }).catch((error) => {
         console.log(error);
